@@ -19,7 +19,6 @@ size_flags_vertical = 6
 text = "Game Over"
 align = 1
 valign = 1
-percent_visible = -0.125
 __meta__ = {
 "_editor_description_": ""
 }
