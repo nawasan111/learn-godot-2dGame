@@ -13,6 +13,8 @@ var is_attack_pressed = false
 var fire_rate = 0.0
 var next_fire = 1
 
+var hp = 10
+
 func _ready():
 	pass
 
@@ -46,8 +48,23 @@ func _physics_process(delta):
 		
 	speed = clamp(speed, 0, MAX_SPEED)
 	velocity = speed * delta * direction
-	move_and_collide(Vector2(velocity, 0))
-	print(speed)
+	# move_and_collide(Vector2(velocity, 0))
+	var collision = move_and_collide(Vector2(velocity, 0))
+	if collision:
+		print(collision.collider.name)
+		print("hp", hp)
+		if collision.collider.name == "enemy(Clone)":
+			hp -= 1
+		if collision.collider.name == "Gate":
+			yield(get_tree().create_timer(1.5), "timeout")
+			get_tree().change_scene("res://Boss.tscn")
+	
+	if hp <= 0:
+		get_node("AnimatedSprite").play("down")
+		get_node("CollisionShape2D").disabled = true
+		yield(get_tree().create_timer(2.0), "timeout")
+		get_tree().change_scene("res://GameOver.tscn")
+	
 	
 	#Jump
 	if Input.is_action_pressed("ui_up"):
@@ -65,11 +82,13 @@ func _physics_process(delta):
 	if fire_rate >= next_fire:
 		fire_rate = 0.0
 		is_attack_pressed = false
+		get_node("AudioStreamPlayer2D").stop()
 		get_node("AnimatedSprite").play("Idle")	
 	pass
 	
 	
 func fire():
+	get_node("AudioStreamPlayer2D").play()
 	var project_title = preload("res://Bullet.tscn")
 	var bullet_instance = project_title.instance()
 	bullet_instance.set_name("Bullet(Clone)")

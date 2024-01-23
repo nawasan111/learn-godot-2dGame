@@ -14,6 +14,8 @@ func _physics_process(delta):
 	if collision:
 		if collision.collider.name == "Bullet(Clone)":
 			hp = hp - 1
+		if collision.collider.name == "Player":
+			queue_free()
 		
 	if hp <= 0:
 		wait_time += delta

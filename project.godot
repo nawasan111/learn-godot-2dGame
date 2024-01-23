@@ -10,8 +10,8 @@ config_version=4
 
 [application]
 
-config/name="godot-learn"
-run/main_scene="res://Charactor.tscn"
+config/name="learn-godot"
+run/main_scene="res://Boss.tscn"
 config/icon="res://icon.png"
 
 [autoload]
