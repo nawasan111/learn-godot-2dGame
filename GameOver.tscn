@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://GameOver.gd" type="Script" id=1]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://fonts/Roboto-Medium.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 50
+font_data = SubResource( 1 )
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
@@ -11,14 +18,25 @@ offset = Vector2( 300, 100 )
 
 [node name="Label" type="Label" parent="."]
 anchor_right = 10.0
-margin_left = 375.0
-margin_top = 203.0
-margin_right = 593.0
-margin_bottom = 327.0
+margin_left = 389.0
+margin_top = 123.0
+margin_right = 638.0
+margin_bottom = 247.0
 size_flags_vertical = 6
+custom_fonts/font = SubResource( 2 )
 text = "Game Over"
 align = 1
 valign = 1
 __meta__ = {
 "_editor_description_": ""
 }
+
+[node name="Label2" type="Label" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 426.0
+margin_top = 318.0
+margin_right = 609.0
+margin_bottom = 332.0
+text = "press  \"enter\" to go to menu"
